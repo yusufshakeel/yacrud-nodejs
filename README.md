@@ -26,6 +26,23 @@ This is a NodeJS project. First, install all the packages by running the followi
 npm i
 ```
 
+## Environment variables
+
+Set the following environment variables.
+
+```
+export NODE_ENV=dev
+export FASTIFY_KEEP_ALIVE_TIMEOUT=10000
+export FASTIFY_HOST=0.0.0.0
+export FASTIFY_PORT=3000
+export FASTIFY_LOGGER_ENABLED=enabled
+export DATABASE_HOST=localhost
+export DATABASE_PORT=5432
+export DATABASE_NAME=yacrud
+export DATABASE_USER=
+export DATABASE_PASSWORD=
+```
+
 ## Localhost server
 
 To start the localhost server.
