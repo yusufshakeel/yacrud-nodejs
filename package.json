@@ -4,7 +4,12 @@
   "description": "Yet Another Create, Read, Update and Delete project in Node.js.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "jest -c jest.config.json",
+    "lint": "npx eslint -c .eslintrc.json src test",
+    "lint:fix": "npx eslint --fix -c .eslintrc.json src test",
+    "precommit": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
