@@ -223,6 +223,27 @@ Using environment: dev
 Batch 1 run: 1 migrations
 ```
 
+Checking tables.
+
+Note! Replace -h -p -U -d values with your own.
+```
+➜ psql -h 127.0.0.1 -p 5432 -U yusufshakeel -d yacrud
+
+psql (12.14)
+Type "help" for help.
+
+yacrud=# \dt;
+                  List of relations
+ Schema |         Name         | Type  |    Owner
+--------+----------------------+-------+--------------
+ public | knex_migrations      | table | yusufshakeel
+ public | knex_migrations_lock | table | yusufshakeel
+ public | message              | table | yusufshakeel
+(3 rows)
+
+yacrud=#
+```
+
 ## Localhost server
 
 To start the localhost server.
