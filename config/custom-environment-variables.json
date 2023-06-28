@@ -1,0 +1,17 @@
+{
+  "environment": "ENVIRONMENT",
+  "nodeEnvironment": "NODE_ENV",
+  "fastify": {
+    "keepAliveTimeout": "FASTIFY_KEEP_ALIVE_TIMEOUT",
+    "host": "FASTIFY_HOST",
+    "port": "FASTIFY_PORT",
+    "loggerEnabled": "FASTIFY_LOGGER_ENABLED"
+  },
+  "database": {
+    "host": "DATABASE_HOST",
+    "port": "DATABASE_PORT",
+    "database": "DATABASE_NAME",
+    "user": "DATABASE_USER",
+    "password": "DATABASE_PASSWORD"
+  }
+}
