@@ -9,7 +9,11 @@
     "test": "jest -c jest.config.json",
     "lint": "npx eslint -c .eslintrc.json src test",
     "lint:fix": "npx eslint --fix -c .eslintrc.json src test",
-    "precommit": "npm run lint && npm run test"
+    "precommit": "npm run lint && npm run test",
+    "recreate-database": "node script/recreate-database-script.js",
+    "knex:migrate:make": "knex migrate:make --knexfile ./knexfile.js",
+    "knex:migrate:rollback": "knex migrate:rollback --debug --knexfile ./knexfile.js",
+    "knex:migrate:latest": "knex migrate:latest --debug --knexfile ./knexfile.js"
   },
   "repository": {
     "type": "git",
