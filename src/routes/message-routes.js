@@ -1,105 +1,36 @@
 'use strict';
 
-const messageSchema = {
-  type: 'object',
-  properties: {
-    id: {
-      type: 'string',
-      format: 'uuid'
+const {
+  errorResponseSchema,
+  createMessageSchema,
+  patchMessageSchema,
+  messagesResponseSchema,
+  messageResponseSchema,
+  idResponseSchema
+} = require('../schemas/message-schema');
+
+module.exports = async function MessagesRoutes(fastify, { controllers }) {
+  fastify.route({
+    method: 'POST',
+    url: '/messages',
+    schema: {
+      tags: ['APIs'],
+      description: 'Create a new message.',
+      body: createMessageSchema,
+      response: {
+        200: idResponseSchema,
+        400: errorResponseSchema,
+        500: errorResponseSchema
+      }
     },
-    message: {
-      type: 'string'
-    },
-    createdAt: {
-      type: 'string',
-      format: 'date-time'
-    },
-    updatedAt: {
-      type: 'string',
-      format: 'date-time'
+    handler: async function (request, reply) {
+      const result = await controllers.messageController.createMessage({
+        message: request.body.data.message
+      });
+      responseHandler(result, reply);
     }
-  }
-};
+  });
 
-const createMessageSchema = {
-  type: 'object',
-  required: ['data'],
-  properties: {
-    data: {
-      type: 'object',
-      required: ['message'],
-      properties: {
-        message: {
-          type: 'string'
-        }
-      }
-    }
-  }
-};
-
-const patchMessageSchema = {
-  type: 'object',
-  required: ['data'],
-  properties: {
-    data: {
-      type: 'object',
-      required: ['message'],
-      properties: {
-        message: {
-          type: 'string'
-        }
-      }
-    }
-  }
-};
-
-const messagesResponseSchema = {
-  type: 'object',
-  properties: {
-    data: {
-      type: 'object',
-      properties: {
-        messages: {
-          type: 'array',
-          items: {
-            ...messageSchema
-          }
-        }
-      }
-    }
-  }
-};
-
-const messageResponseSchema = {
-  type: 'object',
-  properties: {
-    data: {
-      type: 'object',
-      properties: {
-        message: {
-          ...messageSchema
-        }
-      }
-    }
-  }
-};
-
-const idResponseSchema = {
-  type: 'object',
-  properties: {
-    data: {
-      type: 'object',
-      properties: {
-        id: {
-          type: 'string',
-          format: 'uuid'
-        }
-      }
-    }
-  }
-};
-
-module.exports = async function MessagesRoutes(fastify) {
   fastify.route({
     method: 'GET',
     url: '/messages',
@@ -107,22 +38,14 @@ module.exports = async function MessagesRoutes(fastify) {
       tags: ['APIs'],
       description: 'Fetch all the messages.',
       response: {
-        200: messagesResponseSchema
+        200: messagesResponseSchema,
+        400: errorResponseSchema,
+        500: errorResponseSchema
       }
     },
     handler: async function (request, reply) {
-      reply.code(200).send({
-        data: {
-          messages: [
-            {
-              id: 'af94356f-8ef8-41fd-b46d-fa23af83058b',
-              message: 'Hello, World!',
-              createdAt: '2023-06-28T17:30:51.439Z',
-              updatedAt: '2023-06-28T17:30:51.439Z'
-            }
-          ]
-        }
-      });
+      const result = await controllers.messageController.fetchAllMessages();
+      responseHandler(result, reply);
     }
   });
 
@@ -140,66 +63,16 @@ module.exports = async function MessagesRoutes(fastify) {
         }
       },
       response: {
-        200: messageResponseSchema
+        200: messageResponseSchema,
+        400: errorResponseSchema,
+        500: errorResponseSchema
       }
     },
     handler: async function (request, reply) {
-      reply.code(200).send({
-        data: {
-          message: {
-            id: 'af94356f-8ef8-41fd-b46d-fa23af83058b',
-            message: 'Hello, World!',
-            createdAt: '2023-06-28T17:30:51.439Z',
-            updatedAt: '2023-06-28T17:30:51.439Z'
-          }
-        }
+      const result = await controllers.messageController.fetchMessageByMessageId({
+        messageId: request.params.messageId
       });
-    }
-  });
-
-  fastify.route({
-    method: 'POST',
-    url: '/messages',
-    schema: {
-      tags: ['APIs'],
-      description: 'Create a new message.',
-      body: createMessageSchema,
-      response: {
-        200: idResponseSchema
-      }
-    },
-    handler: async function (request, reply) {
-      reply.code(200).send({
-        data: {
-          id: 'af94356f-8ef8-41fd-b46d-fa23af83058b'
-        }
-      });
-    }
-  });
-
-  fastify.route({
-    method: 'DELETE',
-    url: '/messages/:messageId',
-    schema: {
-      tags: ['APIs'],
-      description: 'Delete a message by messageId.',
-      params: {
-        type: 'object',
-        required: ['messageId'],
-        properties: {
-          messageId: { type: 'string', format: 'uuid' }
-        }
-      },
-      response: {
-        200: idResponseSchema
-      }
-    },
-    handler: async function (request, reply) {
-      reply.code(200).send({
-        data: {
-          id: 'af94356f-8ef8-41fd-b46d-fa23af83058b'
-        }
-      });
+      responseHandler(result, reply);
     }
   });
 
@@ -218,17 +91,53 @@ module.exports = async function MessagesRoutes(fastify) {
         }
       },
       response: {
-        200: idResponseSchema
+        200: idResponseSchema,
+        400: errorResponseSchema,
+        500: errorResponseSchema
       }
     },
     handler: async function (request, reply) {
-      reply.code(200).send({
-        data: {
-          id: 'af94356f-8ef8-41fd-b46d-fa23af83058b'
-        }
+      const result = await controllers.messageController.updateMessageByMessageId({
+        messageId: request.params.messageId,
+        message: request.body.data.message
       });
+      responseHandler(result, reply);
     }
   });
+
+  fastify.route({
+    method: 'DELETE',
+    url: '/messages/:messageId',
+    schema: {
+      tags: ['APIs'],
+      description: 'Delete a message by messageId.',
+      params: {
+        type: 'object',
+        required: ['messageId'],
+        properties: {
+          messageId: { type: 'string', format: 'uuid' }
+        }
+      },
+      response: {
+        200: idResponseSchema,
+        400: errorResponseSchema,
+        500: errorResponseSchema
+      }
+    },
+    handler: async function (request, reply) {
+      const result = await controllers.messageController.deleteMessageByMessageId({
+        messageId: request.params.messageId
+      });
+      responseHandler(result, reply);
+    }
+  });
+
+  const responseHandler = (result, reply) => {
+    if (result.error) {
+      return reply.code(result.code).send(result);
+    }
+    reply.code(200).send(result);
+  };
 
   return fastify;
 };

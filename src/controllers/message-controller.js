@@ -48,7 +48,7 @@ module.exports = function MessageController({ repositories }) {
     } catch (e) {
       return {
         code: 400,
-        error: { message: 'Failed to fetch the message.', errorMessage: e.message }
+        error: { message: 'Failed to fetch the message.', error: e.message }
       };
     }
   };
@@ -65,7 +65,7 @@ module.exports = function MessageController({ repositories }) {
     } catch (e) {
       return {
         code: 400,
-        error: { message: 'Failed to update the message.', errorMessage: e.message }
+        error: { message: 'Failed to update the message.', error: e.message }
       };
     }
   };
@@ -77,7 +77,7 @@ module.exports = function MessageController({ repositories }) {
     } catch (e) {
       return {
         code: 400,
-        error: { message: 'Failed to delete the message.', errorMessage: e.message }
+        error: { message: 'Failed to delete the message.', error: e.message }
       };
     }
   };
