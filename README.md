@@ -33,7 +33,7 @@ Set the following environment variables.
 
 ```
 export NODE_ENV=dev
-export FASTIFY_KEEP_ALIVE_TIMEOUT=10000
+export FASTIFY_KEEP_ALIVE_TIMEOUT=30000
 export FASTIFY_HOST=0.0.0.0
 export FASTIFY_PORT=3000
 export FASTIFY_LOGGER_ENABLED=enabled
