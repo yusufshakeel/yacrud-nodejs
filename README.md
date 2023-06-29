@@ -27,7 +27,7 @@ This is a NodeJS project. First, install all the packages by running the followi
 npm i
 ```
 
-## Environment variables
+### Environment variables
 
 Set the following environment variables.
 
@@ -47,7 +47,7 @@ export DATABASE_CONNECTION_POOL_MAX_CONNECTIONS=2
 export DATABASE_QUERY_LOGGING_ENABLED=disabled
 ```
 
-Create a database in local machine.
+### Create a database in local machine.
 
 We can use `psql` and create the database or run the following command.
 
@@ -66,7 +66,7 @@ CREATED DATABASE: yacrud
 Done!
 ```
 
-Run knex migrations
+### Run knex migrations
 
 ```
 npm run knex:migrate:latest
@@ -226,7 +226,7 @@ Using environment: dev
 Batch 1 run: 1 migrations
 ```
 
-Checking tables.
+### Checking tables.
 
 Note! Replace -h -p -U -d values with your own.
 ```
