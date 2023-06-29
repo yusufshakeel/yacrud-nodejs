@@ -370,13 +370,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{DOMAIN_URL}}/messages/af94356f-8ef8-41fd-b46d-fa23af83058b",
+							"raw": "{{DOMAIN_URL}}/messages/{{messageId}}",
 							"host": [
 								"{{DOMAIN_URL}}"
 							],
 							"path": [
 								"messages",
-								"af94356f-8ef8-41fd-b46d-fa23af83058b"
+								"{{messageId}}"
 							]
 						}
 					},
@@ -485,6 +485,19 @@
 				},
 				{
 					"name": "Create a new message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp = JSON.parse(responseBody);",
+									"pm.environment.set(\"messageId\", resp.data.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -633,13 +646,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{DOMAIN_URL}}/messages/af94356f-8ef8-41fd-b46d-fa23af83058b",
+							"raw": "{{DOMAIN_URL}}/messages/{{messageId}}",
 							"host": [
 								"{{DOMAIN_URL}}"
 							],
 							"path": [
 								"messages",
-								"af94356f-8ef8-41fd-b46d-fa23af83058b"
+								"{{messageId}}"
 							]
 						}
 					},
@@ -761,13 +774,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{DOMAIN_URL}}/messages/af94356f-8ef8-41fd-b46d-fa23af83058b",
+							"raw": "{{DOMAIN_URL}}/messages/{{messageId}}",
 							"host": [
 								"{{DOMAIN_URL}}"
 							],
 							"path": [
 								"messages",
-								"af94356f-8ef8-41fd-b46d-fa23af83058b"
+								"{{messageId}}"
 							]
 						}
 					},
