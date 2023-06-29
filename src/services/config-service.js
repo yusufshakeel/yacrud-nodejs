@@ -5,7 +5,7 @@ module.exports = function () {
   const environment = config.get('environment');
   const nodeEnvironment = config.get('nodeEnvironment');
   const fastify = {
-    keepAliveTimeout: config.get('fastify.keepAliveTimeout'),
+    keepAliveTimeout: parseInt(config.get('fastify.keepAliveTimeout')),
     host: config.get('fastify.host'),
     port: config.get('fastify.port'),
     logger: config.get('fastify.loggerEnabled') === ENABLED
