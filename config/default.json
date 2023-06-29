@@ -8,10 +8,15 @@
     "loggerEnabled": "enabled"
   },
   "database": {
-    "host": "host",
-    "port": "port",
-    "database": "name",
-    "user": "user",
-    "password": "password"
-  }
+    "host": "localhost",
+    "port": 5432,
+    "database": "yacrud",
+    "user": "",
+    "password": ""
+  },
+  "databaseConnectionPool": {
+    "min": 3,
+    "max": 5
+  },
+  "databaseQueryLoggingEnabled": "disabled"
 }
