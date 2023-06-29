@@ -11,6 +11,10 @@ Yet Another Create, Read, Update and Delete project in Node.js.
   * [Update a message by messageId](#update-a-message-by-messageid)
   * [Delete a message by messageId](#delete-a-message-by-messageid)
 
+## Note!
+
+This is just a basic CRUD project for learning and demo purposes.
+
 ## Prerequisite
 
 This project depends on the following.
