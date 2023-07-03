@@ -26,7 +26,7 @@ async function dropDatabase() {
   const isDatabasePresent = await knex.raw(`select exists(
         SELECT datname FROM pg_catalog.pg_database WHERE datname = '${databaseConfiguration.database}'
        )`);
-  if (isDatabasePresent !== 't') {
+  if (isDatabasePresent?.rows?.[0]?.exists) {
     console.info(`DROPPING DATABASE: ${databaseConfiguration.database}`);
     await knex.raw(`DROP DATABASE ${databaseConfiguration.database}`);
     console.info(`DROPPED DATABASE! ${databaseConfiguration.database}`);
